@@ -28,6 +28,8 @@ function registrarPago() {
     var nombre = document.getElementById("nombre").value;
     var fecha = document.getElementById("fecha").value;
     var monto = document.getElementById("monto").value;
+    var sucursal = document.getElementById("sucursal").value;
+
 
     // Realizar una petición AJAX para guardar los datos en la base de datos
     fetch('registrar_pago.php', {
@@ -35,7 +37,7 @@ function registrarPago() {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: 'nombre=' + encodeURIComponent(nombre) + '&fecha=' + encodeURIComponent(fecha) + '&monto=' + encodeURIComponent(monto),
+        body: 'nombre=' + encodeURIComponent(nombre) + '&fecha=' + encodeURIComponent(fecha) + '&monto=' + encodeURIComponent(monto) +  '&sucursal=' + encodeURIComponent(sucursal),
     })
     .then(response => response.text())
     .then(data => {

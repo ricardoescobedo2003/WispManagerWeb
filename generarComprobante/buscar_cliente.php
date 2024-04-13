@@ -27,6 +27,7 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
+    $no_cliente = $row['no_cliente'];
     $cliente_nombre = $row['nombre'];
     $fecha_pago = $row['fecha'];
     $monto_pago = $row['monto'];
@@ -62,6 +63,10 @@ $conn->close();
                 </tr>
             </thead>
             <tbody>
+            <tr>
+                    <td>No Cliente: </td>
+                    <td><?php echo $no_cliente; ?></td>
+                </tr>
                 <tr>
                     <td>Nombre del Cliente:</td>
                     <td><?php echo $cliente_nombre; ?></td>

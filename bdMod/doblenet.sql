@@ -24,16 +24,17 @@ DROP TABLE IF EXISTS `clientes`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `clientes` (
   `id_cliente` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) NOT NULL,
-  `direccion` varchar(150) DEFAULT NULL,
+  `no_cliente` int DEFAULT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
+  `direccion` varchar(255) DEFAULT NULL,
   `telefono` varchar(15) DEFAULT NULL,
-  `fechaInstalacion` varchar(100) DEFAULT NULL,
-  `equipos` varchar(100) DEFAULT NULL,
-  `mensualidad` varchar(255) DEFAULT NULL,
-  `localidad` varchar(255) DEFAULT NULL,
+  `fechaInstalacion` date DEFAULT NULL,
+  `equipos` varchar(255) DEFAULT NULL,
+  `mensualidad` decimal(10,2) DEFAULT NULL,
+  `localidad` varchar(50) DEFAULT NULL,
   `comentarios` text,
   PRIMARY KEY (`id_cliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +43,6 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (1,'Ejemplo 1','Ejemplo 1','2323232323','2023-12-12','Ejemplo 1','340','Tierra Blanca','Ejemplo1'),(2,'Ejemplo2','Ejmplo2','11111111','1111-11-11','Ejemplo2','2323','Tierra Blanca','Ejemplo2'),(3,'Sandra Marente','Joaquin Amaro 12','4981442266','2023-12-22','LiteBeam M5, TpLink 840N','300','Carrilo Puerto','Servicio enfocado solamenta a un servidor'),(4,'Arnold','San Lucas','00000','1212-12-12','Linea de servidor','450','Tierra Blanca','N/A'),(5,'Ricardo Escobedo','Joaquin Amaro 12','4981442266','2024-12-12','PowerBeam CX5, Microtik RB','3400','Carrilo Puerto','Servicio ofrecido para un wisp');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -55,11 +55,13 @@ DROP TABLE IF EXISTS `pagos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pagos` (
   `id_pago` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(255) NOT NULL,
-  `fecha` varchar(20) NOT NULL,
-  `monto` decimal(10,2) NOT NULL,
+  `no_cliente` int DEFAULT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `monto` decimal(10,2) DEFAULT NULL,
+  `no_recibo` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_pago`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +70,6 @@ CREATE TABLE `pagos` (
 
 LOCK TABLES `pagos` WRITE;
 /*!40000 ALTER TABLE `pagos` DISABLE KEYS */;
-INSERT INTO `pagos` VALUES (1,'Ricardo Escobdo','2024-03-18',300.00),(2,'Arnold','2024-03-18',345.00),(3,'Sandra Marente','2024-03-08',566.00),(4,'Sandra Marente','2024-03-10',566.00),(5,'Sandra Marente','2024-03-14',566.00),(6,'Sandra Marente','2024-03-18',566.00),(7,'Ricardo Escobedo','2024-03-18',3500.00);
 /*!40000 ALTER TABLE `pagos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,7 +85,7 @@ CREATE TABLE `usuarios` (
   `username` varchar(20) NOT NULL,
   `password` varchar(10) NOT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +94,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'ricardo.escobedo','21060212'),(2,'prueba.demo','demo123');
+INSERT INTO `usuarios` VALUES (1,'ricardo.escobedo','21060212'),(2,'prueba.demo','demo123'),(3,'alvaro.amxfiber.net','admin');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -106,4 +107,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-18 12:28:04
+-- Dump completed on 2024-04-13 15:51:37

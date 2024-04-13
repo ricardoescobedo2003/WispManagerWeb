@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 }
 
 // Realizar la consulta
-$sql = "SELECT id_cliente, nombre, direccion, telefono, fechaInstalacion, equipos, mensualidad, localidad, comentarios FROM clientes";
+$sql = "SELECT no_cliente, nombre, direccion, telefono, fechaInstalacion, equipos, mensualidad, localidad, comentarios FROM clientes";
 $result = $conn->query($sql);
 
 // Almacenar resultados en un array

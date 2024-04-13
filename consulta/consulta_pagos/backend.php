@@ -14,8 +14,8 @@ if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 
-// Realizar la consulta
-$sql = "SELECT id_pago, nombre, fecha, monto FROM pagos";
+// Realizar la consulta con ordenamiento por fecha descendente
+$sql = "SELECT no_cliente, nombre, fecha, monto FROM pagos ORDER BY fecha DESC";
 $result = $conn->query($sql);
 
 // Almacenar resultados en un array
@@ -34,5 +34,3 @@ $conn->close();
 header('Content-Type: application/json');
 echo json_encode($clientes);
 ?>
-
-

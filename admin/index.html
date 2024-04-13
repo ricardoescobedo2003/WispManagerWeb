@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/admin-styles.css">
+    <link rel="stylesheet" href="styles.css">
     <title>Registro de Pago</title>
 </head>
 <body>
-    <div class="banner">
-        <img src="/img/logo-wmw.png" alt="Tu Logo">
-        <div class="navigation">
+    <header class="banner">
+        <div class="logo">
+            <img src="/img/logo-wmw.png" alt="Tu Logo">
+        </div>
+        <nav class="navigation">
             <a href="/registro/index.html">Registrar Usuario</a>
             <a href="/homePage/index.html">Historial de Cliente</a>
             <a href="/consulta/consulta_pagos/index.html">Historial General</a>
@@ -17,34 +19,68 @@
             <a href="/consulta/index.html">Mostrar Usuarios</a>
             <a href="/busquedaEdicion/index.html">Modificar Usuario</a>
             <a href="/axe/index.html">Admin</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Bienvenido a Tu Aplicación</h1>
+            <p>Encuentra aquí las herramientas que necesitas.</p>
+        </div>
+    </section>
+
+    <div class="content">
+        <h2>¿Qué puedes hacer aquí?</h2>
+        <div class="feature-blocks">
+            <div class="feature">
+                <h3>Registrar Usuario</h3>
+                <p>Registra nuevos usuarios en el sistema.</p>
+            </div>
+            <div class="feature">
+                <h3>Historial de Cliente</h3>
+                <p>Consulta el historial de pagos de un cliente.</p>
+            </div>
+            <div class="feature">
+                <h3>Generar Comprobante</h3>
+                <p>Genera comprobantes de pago para tus clientes.</p>
+            </div>
+        </div>
+
+        <h2>Servicios que Ofrecemos</h2>
+        <div class="services">
+            <div class="service">
+                <h3>Servicio 1</h3>
+                <p>Creamos aplicaciones a medida del cliente</p>
+            </div>
+            <div class="service">
+                <h3>Servicio 2</h3>
+                <p>Podemos automatizar tareas repetitivas con python</p>
+            </div>
+            <div class="service">
+                <h3>Servicio 3</h3>
+                <p>Sabemos manejar muy bien GNU/Linux</p>
+            </div>
+        </div>
+
+        <h2>Testimonios de Clientes</h2>
+        <div class="testimonials">
+            <div class="testimonial">
+                <blockquote>
+                    "Excelente servicio, ¡recomendado!"
+                </blockquote>
+                <p>- Cliente Satisfecho</p>
+            </div>
+            <div class="testimonial">
+                <blockquote>
+                    "Me ha facilitado mucho la gestión de pagos."
+                </blockquote>
+                <p>- Otro Cliente Feliz</p>
+            </div>
         </div>
     </div>
 
-    <div class="content">
-        <h1>Registro de Pago</h1>
-        <form id="pagoForm" onsubmit="registrarPago(); return false;">
-            <label for="nombre">Nombre:</label>
-            <!-- Reemplazar el campo de nombre por una lista desplegable -->
-            <select id="nombre" name="nombre" required autofocus>
-                <option value="">Selecciona un cliente</option>
-                <!-- Aquí se llenará dinámicamente con los nombres de clientes desde PHP -->
-            </select>
-
-            <label for="fecha">Fecha de Pago:</label>
-            <input type="date" id="fecha" name="fecha" required>
-
-            <label for="monto">Monto:</label>
-            <input type="number" id="monto" name="monto" required>
-
-            <button type="submit">Registrar Pago</button>
-        </form>
-    </div>
-
-    <script src="script.js"></script>
-  
-    <div id="copyright">
-      <p>&copy; Escobedo 2024.</p>
-  </div>
-
+    <footer>
+        <p>&copy; Escobedo 2024.</p>
+    </footer>
 </body>
 </html>

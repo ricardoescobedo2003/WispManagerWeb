@@ -12,16 +12,10 @@ if ($conn->connect_error) {
 }
 
 // Obtener los parámetros de búsqueda desde la solicitud AJAX
-$nombre = $_GET['nombre'];
+$no_cliente = $_GET['no_cliente'];
 
 // Construir la consulta basada en los parámetros recibidos
-$query = "SELECT * FROM pagos WHERE 1=1";
-
-if (!empty($nombre)) {
-    $query .= " AND nombre LIKE '%$nombre%'";
-}
-
-
+$query = "SELECT * FROM pagos WHERE no_cliente = '$no_cliente'";
 
 // Ejecutar la consulta
 $result = $conn->query($query);
@@ -67,7 +61,7 @@ if ($result !== false) {
     echo '</table>';
 
 } else {
-    echo "Error en la consulta SQL.";
+    echo "Error en la consulta SQL: " . $conn->error;
 }
 
 // Cerrar la conexión a la base de datos
