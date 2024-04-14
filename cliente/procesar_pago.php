@@ -5,62 +5,74 @@ $username = "dni";
 $password = "MinuzaFea265/";
 $dbname = "doblenet";
 
+// Crear conexión a la base de datos
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verificar la conexión
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+}
+
 // Obtener los datos enviados por el formulario
 $data = json_decode(file_get_contents('php://input'), true);
 
 // Verificar que se hayan recibido los datos requeridos
 if (isset($data['nombre'], $data['no_recibo'])) {
-  $nombre = $data['nombre'];
-  $no_recibo = $data['no_recibo'];
+    $nombre = $data['nombre'];
+    $no_recibo = $data['no_recibo'];
 
-  // Crear conexión a la base de datos
-  $conn = new mysqli($servername, $username, $password, $dbname);
+    // Consultar si el cliente existe en la tabla clientes
+    $sql_check_client = "SELECT id_cliente, mensualidad FROM clientes WHERE nombre = '$nombre'";
+    $result_check_client = $conn->query($sql_check_client);
 
-  // Verificar la conexión
-  if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-  }
+    if ($result_check_client->num_rows > 0) {
+        // El cliente existe, procedemos con el registro del pago
+        $row = $result_check_client->fetch_assoc();
+        $id_cliente = $row['id_cliente'];
+        $mensualidad = $row['mensualidad'];
 
-  // Consultar el no_cliente, nombre y mensualidad del cliente
-  $sql = "SELECT no_cliente, nombre, mensualidad FROM clientes WHERE nombre = '$nombre'";
-  $result = $conn->query($sql);
+        // Obtener la fecha actual
+        $fecha_actual = date('Y-m-d');
 
-  if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $no_cliente = $row['no_cliente'];
-    $nombre_cliente = $row['nombre'];
-    $mensualidad = $row['mensualidad'];
+        // Insertar datos en la tabla de pagos
+        $sql_insert_payment = "INSERT INTO pagos (no_cliente, nombre, fecha, monto, no_recibo) VALUES ('$id_cliente', '$nombre', '$fecha_actual', '$mensualidad', '$no_recibo')";
 
-    // Obtener la fecha actual
-    $fecha_actual = date('Y-m-d');
+        if ($conn->query($sql_insert_payment) === TRUE) {
+            // Consultar la URL de la API en la tabla apiKey
+            $sql_api_key = "SELECT url FROM apiKey";
+            $result_api_key = $conn->query($sql_api_key);
 
-    // Insertar datos en la tabla de pagos
-    $insert_sql = "INSERT INTO pagos (no_cliente, nombre, fecha, monto, no_recibo) VALUES ($no_cliente, '$nombre_cliente', '$fecha_actual', $mensualidad, '$no_recibo')";
+            if ($result_api_key->num_rows > 0) {
+                $row_api_key = $result_api_key->fetch_assoc();
+                $url = $row_api_key['url'];
 
-    if ($conn->query($insert_sql) === TRUE) {
-      // Envío de mensaje por WhatsApp si el registro es correcto
-      $phone = "5214961121843"; // Número de teléfono al que se enviará el mensaje
-      $message = urlencode("El cliente: $nombre_cliente realizó su pago con éxito el día $fecha_actual por la cantidad de: $mensualidad con NO Recibo: $no_recibo.");
-      $apikey = "4387760"; // Tu API Key de CallMeBot
-      $url = "https://api.callmebot.com/whatsapp.php?phone=$phone&text=$message&apikey=$apikey";
+                // Mensaje a enviar con la URL de la API
+                $message = "El cliente: $nombre realizó su pago con éxito el día " . date('Y-m-d') . " por la cantidad de: $mensualidad con NO Recibo: $no_recibo.";
 
-      $response = file_get_contents($url);
+                // Concatenar la URL de la API con el mensaje
+                $url2 = $url . urlencode($message);
 
-      if ($response === false) {
-          echo json_encode(['message' => 'Pago registrado con éxito, pero error al enviar el mensaje por WhatsApp.']);
-      } else {
-          echo json_encode(['message' => 'Pago registrado con éxito y mensaje enviado por WhatsApp.']);
-      }
+                // Enviar el mensaje
+                $response = file_get_contents($url2);
+
+                if ($response !== false) {
+                    echo json_encode(['message' => 'Pago registrado con éxito y mensaje enviado correctamente.']);
+                } else {
+                    echo json_encode(['message' => 'Pago registrado con éxito, pero error al enviar el mensaje.']);
+                }
+            } else {
+                echo json_encode(['message' => 'No se encontró la URL de la API en la base de datos.']);
+            }
+        } else {
+            echo json_encode(['message' => 'Error al registrar el pago en la base de datos: ' . $conn->error]);
+        }
     } else {
-      echo json_encode(['message' => 'Error al registrar el pago: ' . $conn->error]);
+        echo json_encode(['message' => 'El cliente no está registrado en la base de datos. No se puede procesar el pago.']);
     }
-  } else {
-    echo json_encode(['message' => 'No se encontró al cliente con ese nombre']);
-  }
-
-  // Cerrar conexión
-  $conn->close();
 } else {
-  echo json_encode(['message' => 'Falta información para procesar la solicitud']);
+    echo json_encode(['message' => 'Falta información para procesar la solicitud.']);
 }
+
+// Cerrar la conexión
+$conn->close();
 ?>

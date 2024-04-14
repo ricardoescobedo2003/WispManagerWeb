@@ -22,6 +22,18 @@
         </nav>
     </header>
 
+    <!-- Formulario de Registro de Pago -->
+    <section class="payment-form">
+        <h2>Registrar Pago</h2>
+        <form id="paymentForm" action="process_payment.php" method="post">
+            <label for="clientes">Selecciona un cliente:</label>
+            <select id="clientes" name="clientes">
+                <!-- Options will be populated dynamically using JavaScript -->
+            </select>
+            <button type="submit">Registrar Pago</button>
+        </form>
+    </section>
+
     <section class="hero">
         <div class="hero-content">
             <h1>Bienvenido a Tu Aplicación</h1>
@@ -82,5 +94,7 @@
     <footer>
         <p>&copy; Escobedo 2024.</p>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

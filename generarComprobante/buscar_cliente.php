@@ -55,7 +55,6 @@ $conn->close();
 
     </header>
     <div class="container">
-        <h2>Wisp Manager Web</h2>
         <table>
             <thead>
                 <tr>
@@ -85,15 +84,16 @@ $conn->close();
             <p><strong>Información adicional:</strong></p>
             <hr>
                 <p><strong>Fecha de Emisión:</strong> <?php echo date("d/m/Y"); ?></p>
-                <p><strong>Fecha de Vencimiento: 25 dias despues de emision</strong></p>
+                <p><strong>Fecha de Vencimiento: 25 días después de emisión</strong></p>
                 <hr>
 
                 <hr>
                 <h4>Método de Pago:</h4>
                 <p>Por favor, realiza el pago utilizando uno de los siguientes métodos:</p>
                 <ul>
-                    <li>Transferencia bancaria a la cuenta XXXX-XXXX-XXXX</li>
-                    <li>Pago en efectivo con algun administrador</li>
+                    <li>Transferencia bancaria a la cuenta 4217-4700-0129-8922</li>
+                    <li>Transferencia bancaria tipo STP 646930146401986182</li>
+                    <li>Pago en efectivo con algún administrador</li>
                     <!-- Agrega más métodos de pago según sea necesario -->
                 </ul>
                 <hr>
@@ -106,9 +106,8 @@ $conn->close();
                 </ul>
             <hr>
             <p><strong>Términos y Condiciones:</strong>
-            Este documento sirve únicamente como comprobante de pago y no constituye una factura oficial.
-            El pago registrado en este comprobante se refiere a los servicios/productos previamente acordados entre el cliente y Doblenet.
-            .</p>
+            Este documento sirve únicamente como comprobante de pago y no constituye una factura oficial.</p>
+            <p>&copy; <?php echo date("Y"); ?> Software por Escobedo & DobleNet.</p>
         </div>
     </div>
 </body>

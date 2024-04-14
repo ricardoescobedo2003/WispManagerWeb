@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 }
 
 // Realizar la consulta con ordenamiento por fecha descendente
-$sql = "SELECT no_cliente, nombre, fecha, monto FROM pagos ORDER BY fecha DESC";
+$sql = "SELECT no_cliente, nombre, fecha, monto, no_recibo FROM pagos ORDER BY fecha DESC";
 $result = $conn->query($sql);
 
 // Almacenar resultados en un array

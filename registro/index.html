@@ -59,24 +59,7 @@
 
             <label for="localidad">Localidad:</label>
             <select id="localidad" name="localidad" required>
-                <option value="Tierra Blanca">Tierra Blanca </option>
-                <option value="Playas del Refugio">Playas del Refugio</option>
-                <option value="General Lauro">General Lauro</option>
-                <option value="Colonia Pozo Colorado">Colonia Pozo Colorado</option>
-                <option value="Maravillas">Maravillas</option>
-                <option value="Colonia Madero">Colonia Madero</option>
-                <option value="Colonia Lazaro Cardenas">Colonia Lazaro Cardenas</option>
-                <option value="Noria de Molinos">Noria de Molinos</option>
-                <option value="La Manga">La Manga</option>
-                <option value="El Tepetate">El Tepetate</option>
-                <option value="Carrilo Puerto">Carrilo Puerto</option>
-                <option value="Jarillas">Jarillas</option>
-                <option value="Noria del Borrego">Noria del Borrego</option>
-                <option value="La Victoria">La Victoria</option>
-                <option value="La Victoria">El Prieto</option>
-                <option value="Guadalupe de Atlas">Guadalupe de Atlas</option>
-                <option value="El Rascon">El Rascon</option>
-                <!-- Agrega más opciones según sea necesario -->
+                <!-- Las opciones se cargarán dinámicamente con JavaScript -->
             </select>
 
             <label for="fechaInstalacion">Fecha de Instalación:</label>
@@ -93,6 +76,30 @@
 
         </form>
     </div>
+    <script>
+        // Función para cargar las localidades desde el servidor y rellenar la lista desplegable
+        window.onload = function() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    // Parsear la respuesta JSON
+                    var localidades = JSON.parse(this.responseText);
+                    // Obtener el elemento select
+                    var selectLocalidad = document.getElementById("localidad");
+                    // Rellenar el select con las localidades
+                    localidades.forEach(function(localidad) {
+                        var option = document.createElement("option");
+                        option.text = localidad;
+                        option.value = localidad;
+                        selectLocalidad.appendChild(option);
+                    });
+                }
+            };
+            // Hacer una solicitud GET al servidor para obtener las localidades
+            xmlhttp.open("GET", "get_localidades.php", true);
+            xmlhttp.send();
+        };
+    </script>
 </body>
 
 </html>

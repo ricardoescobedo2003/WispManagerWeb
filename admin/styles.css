@@ -96,3 +96,44 @@ footer {
     text-align: center;
     padding: 10px;
 }
+/* Añadir estilos para el formulario de registro de pago */
+.payment-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px auto;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.payment-form h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.payment-form label {
+    margin-bottom: 10px;
+    display: block;
+}
+
+.payment-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.payment-form button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.payment-form button:hover {
+    background-color: #2980b9;
+}

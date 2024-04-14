@@ -3,14 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear/Editar Usuario</title>
+    <title>Crear/Editar Usuarios</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .options {
+            margin-top: 20px;
+        }
+
+        .options a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            background-color: #555;
+        }
+
+        .options a:hover {
+            background-color: #777;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Crear/Editar Usuario</h1>
+        <h1>Menú de Herramientas</h1>
+        <div class="options">
+            <a href="/manager/index.html">Consultar Usuarios</a>
+            <a href="/comunidades/index.html">Consultar Comunidades</a>
+        </div>
     </header>
     <div class="container">
+        <h2>Crear/Editar Usuarios</h2>
         <form id="userForm">
             <label for="username">Nombre de usuario:</label>
             <input type="text" id="username" name="username" required>
@@ -18,7 +52,29 @@
             <input type="password" id="password" name="password" required>
             <button type="submit">Guardar</button>
         </form>
-        <div id="message"></div>
+        <hr> <!-- Agregamos una línea horizontal para separar los formularios -->
+        <h2>Agregar Comunidad</h2>
+        <form id="communityForm">
+            <label for="communityName">Nombre de la comunidad:</label>
+            <input type="text" id="communityName" name="communityName" required>
+            <button type="submit">Agregar Comunidad</button>
+        </form>
+        <div id="communityMessage"></div>
+        <hr> <!-- Otra línea horizontal para separar los formularios -->
+        <h2>Ingresar URL de la API</h2>
+        <p>Configuración:</p>
+        <ol>
+            <li>Inicia una conversación en Facebook Messenger con <a href="https://m.me/api.callmebot" target="_blank">@api.callmebot</a></li>
+            <li>Envía "create apikey" a <a href="https://m.me/api.callmebot" target="_blank">@api.callmebot</a></li>
+            <li>El bot generará una apikey segura para ti.</li>
+            <li>El bot te responderá con tu apikey personal.</li>
+        </ol>
+        <form id="apiUrlForm">
+            <label for="apiUrl">URL de la API:</label>
+            <input type="text" id="apiUrl" name="apiUrl" required>
+            <button type="submit">Guardar URL</button>
+        </form>
+        <div id="apiUrlMessage"></div>
     </div>
     <script src="script.js"></script>
 </body>

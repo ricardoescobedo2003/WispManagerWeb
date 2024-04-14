@@ -4,12 +4,15 @@ $username = "dni";
 $password = "MinuzaFea265/";
 $dbname = "doblenet";
 
+// Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+// Verificar la conexión
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die("Conexión fallida: " . $conn->connect_error);
 }
 
+// Obtener el nombre de usuario y la contraseña del formulario
 $username = $_POST['username'];
 $password = $_POST['password'];
 
@@ -35,5 +38,6 @@ if ($result_check_user->num_rows > 0) {
     }
 }
 
+// Cerrar conexión
 $conn->close();
 ?>
