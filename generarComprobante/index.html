@@ -14,7 +14,7 @@
         </div>
     </header>
     <div class="container">
-        <form id="searchForm" action="buscar_cliente.php" method="POST">
+        <form id="searchForm">
             <label for="clientes">Selecciona un cliente:</label>
             <!-- Aquí se insertará la lista desplegable de clientes -->
             <button type="submit">Buscar</button>
@@ -39,26 +39,22 @@
             });
             const searchForm = document.getElementById('searchForm');
             searchForm.insertBefore(clientesSelect, searchForm.lastElementChild);
-        });
 
-        document.getElementById("searchForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Evitar el envío del formulario por defecto
+            searchForm.addEventListener("submit", function(event) {
+                event.preventDefault(); // Evitar el envío del formulario por defecto
 
-            var formData = new FormData(this);
+                var formData = new FormData(this);
 
-            fetch(this.action, {
-                method: this.method,
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                // Oculta el formulario después de recibir la respuesta
-                document.getElementById("searchForm").style.display = "none";
-
-                // Muestra el resultado dentro del elemento con id "resultado"
-                document.getElementById("resultado").innerHTML = data;
-            })
-            .catch(error => console.error('Error:', error));
+                fetch('buscar_cliente.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("resultado").innerHTML = data;
+                })
+                .catch(error => console.error('Error:', error));
+            });
         });
     });
     </script>

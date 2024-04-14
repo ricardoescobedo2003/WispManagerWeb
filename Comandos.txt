@@ -79,3 +79,13 @@ mysqldump -u usuario -p doblenet > backup.sql
 ---------------IMPORTAR MYSQL-------------------
 mysql -u usuario -p doblenet < backup.sql
 -------------------------------------------------
+
+
+
+CREATE TABLE apiKey (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    url VARCHAR(255) NOT NULL
+);
+
+
+INSERT INTO apiKey (url) VALUES ('https://api.callmebot.com/facebook/send.php?apikey=U3OF6i7WX5TMPWPC&text=');

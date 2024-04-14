@@ -10,31 +10,22 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$nombre = $_POST['nombre'];
+$no_cliente = $_POST['clientes'];
 
-// Dividir el nombre en partes
-$nombre_parts = explode(" ", $nombre);
-
-// Crear una cadena de búsqueda para cada parte del nombre
-$search_conditions = [];
-foreach ($nombre_parts as $part) {
-    $search_conditions[] = "nombre LIKE '%$part%'";
-}
-$search_conditions_str = implode(" AND ", $search_conditions);
-
-$sql = "SELECT * FROM pagos WHERE $search_conditions_str ORDER BY fecha DESC LIMIT 1";
+$sql = "SELECT * FROM clientes WHERE no_cliente = '$no_cliente'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    $no_cliente = $row['no_cliente'];
     $cliente_nombre = $row['nombre'];
-    $fecha_pago = $row['fecha'];
-    $monto_pago = $row['monto'];
+    $direccion = $row['direccion'];
+    $telefono = $row['telefono'];
+    // Agregar más campos según sea necesario
 } else {
-    $cliente_nombre = "No encontrado";
-    $fecha_pago = "No encontrado";
-    $monto_pago = "No encontrado";
+    $cliente_nombre = "Cliente no encontrado";
+    $direccion = "No disponible";
+    $telefono = "No disponible";
+    // Agregar más campos según sea necesario
 }
 
 $conn->close();
